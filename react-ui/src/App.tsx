@@ -19,7 +19,7 @@ function App() {
         setMessage(json.message);
         setIsFetching(false);
       }).catch(e => {
-        setMessage(`API call failed: ${e}`);
+        setMessage(`API call failed: ${e}` as any);
         setIsFetching(false);
       })
   }, [url]);
