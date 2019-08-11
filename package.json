@@ -15,12 +15,14 @@
   ],
   "dependencies": {
     "@babel/core": "^7.5.5",
+    "@babel/plugin-transform-runtime": "^7.5.5",
     "@babel/preset-env": "^7.5.5",
     "@babel/preset-typescript": "^7.3.3",
     "@babel/register": "^7.5.5",
     "@types/express": "^4.17.0",
     "@types/node-fetch": "^2.5.0",
     "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-preset-react-app": "^9.0.1",
     "express": "^4.16.4",
     "node-fetch": "^2.6.0",
     "ts-node": "^8.3.0"
@@ -35,5 +37,9 @@
     "create-react-app",
     "react"
   ],
-  "license": "MIT"
+  "license": "MIT",
+  "resolutions": {
+    "@types/react": "16.8.4",
+    "babel-preset-react-app": "7.0.0"
+  }
 }
