@@ -19,11 +19,12 @@ class ClashController {
   searchClans(_req: Request, _res: Response){
     // https://api.clashofclans.com/v1/clans?name=BYU%20Bandits&warFrequency=1&locationId=1&minMembers=1&maxMembers=1&minClanPoints=1&minClanLevel=1&limit=1&after=1&before=1
     const url = 'https://api.clashofclans.com/v1/clans?name=BYU%20Bandits';
+    const that = this;
     return fetch(url, {
       method: 'get',
       headers: { 
         'Accept': 'application/json',
-        'Authorization': `Bearer ${this[key]}`
+        'Authorization': `Bearer ${that[key]}`
       },
     })
   }
