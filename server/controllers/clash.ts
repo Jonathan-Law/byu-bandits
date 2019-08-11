@@ -3,12 +3,10 @@ import fetch from 'node-fetch';
 const bearer = Symbol('bearer');
 class ClashController {
   private [bearer]: string;
-  private test: string;
   constructor() {
     this[bearer] = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6IjNhYTgxNmY0LTJjMzQtNGFlMi05ZGYzLTk0NGEyNjY0MzFmNyIsImlhdCI6MTU2NTUwMDMyNiwic3ViIjoiZGV2ZWxvcGVyLzYyNTMzZjNiLTBjNjMtZmRmMi0wNjQ0LThhOTViNWY5M2E4YiIsInNjb3BlcyI6WyJjbGFzaCJdLCJsaW1pdHMiOlt7InRpZXIiOiJkZXZlbG9wZXIvc2lsdmVyIiwidHlwZSI6InRocm90dGxpbmcifSx7ImNpZHJzIjpbIjUyLjg3LjU2LjM2Il0sInR5cGUiOiJjbGllbnQifV19.uQzxbpvfWGIbHqq636dW70u6Qn8JBN94EkuGDKF1aaR5ek2nyf6BePUl7_8OlvuezlkdJo9CwKHmfFJRxUFVpw';
-    this.test = "blah";
   }
-  getCurrentIP(_req: Request, _res: Response) {
+  public getCurrentIP = (_req: Request, _res: Response) => {
     return require('dns').lookup(require('os').hostname(), function (_err: any, add: any, _fam: any) {
       _res.status(200).send({
         success: 'true',
@@ -18,20 +16,19 @@ class ClashController {
     });
   }
 
-  searchClans(_req: Request, _res: Response){
+  public searchClans = (_req: Request, _res: Response) => {
     // https://api.clashofclans.com/v1/clans?name=BYU%20Bandits&warFrequency=1&locationId=1&minMembers=1&maxMembers=1&minClanPoints=1&minClanLevel=1&limit=1&after=1&before=1
     const url = 'https://api.clashofclans.com/v1/clans?name=BYU%20Bandits';
-    return _res.status(200).send({success: false, message: `${this.test}`})
-    // const _bearer = this[bearer];
-    // return fetch(url, {
-    //   method: 'get',
-    //   headers: { 
-    //     'Accept': 'application/json',
-    //     'Authorization': `Bearer ${_bearer}`
-    //   },
-    // }).then((data) => {
-    //   return _res.status(200).send(data);
-    // })
+    const _bearer = this[bearer];
+    return fetch(url, {
+      method: 'get',
+      headers: { 
+        'Accept': 'application/json',
+        'Authorization': `Bearer ${_bearer}`
+      },
+    }).then((data) => {
+      return _res.status(200).send({success: 'true', message: 'Searched for clan', data});
+    });
   }
 
   getTodo(_req: Request, _res: Response) {
