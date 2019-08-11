@@ -2,7 +2,10 @@ import { Request, Response } from "express";
 import fetch from 'node-fetch';
 const key = Symbol();
 class ClashController {
-  private [key] = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6IjNhYTgxNmY0LTJjMzQtNGFlMi05ZGYzLTk0NGEyNjY0MzFmNyIsImlhdCI6MTU2NTUwMDMyNiwic3ViIjoiZGV2ZWxvcGVyLzYyNTMzZjNiLTBjNjMtZmRmMi0wNjQ0LThhOTViNWY5M2E4YiIsInNjb3BlcyI6WyJjbGFzaCJdLCJsaW1pdHMiOlt7InRpZXIiOiJkZXZlbG9wZXIvc2lsdmVyIiwidHlwZSI6InRocm90dGxpbmcifSx7ImNpZHJzIjpbIjUyLjg3LjU2LjM2Il0sInR5cGUiOiJjbGllbnQifV19.uQzxbpvfWGIbHqq636dW70u6Qn8JBN94EkuGDKF1aaR5ek2nyf6BePUl7_8OlvuezlkdJo9CwKHmfFJRxUFVpw';
+  private [key]: string;
+  constructor() {
+    this[key] = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6IjNhYTgxNmY0LTJjMzQtNGFlMi05ZGYzLTk0NGEyNjY0MzFmNyIsImlhdCI6MTU2NTUwMDMyNiwic3ViIjoiZGV2ZWxvcGVyLzYyNTMzZjNiLTBjNjMtZmRmMi0wNjQ0LThhOTViNWY5M2E4YiIsInNjb3BlcyI6WyJjbGFzaCJdLCJsaW1pdHMiOlt7InRpZXIiOiJkZXZlbG9wZXIvc2lsdmVyIiwidHlwZSI6InRocm90dGxpbmcifSx7ImNpZHJzIjpbIjUyLjg3LjU2LjM2Il0sInR5cGUiOiJjbGllbnQifV19.uQzxbpvfWGIbHqq636dW70u6Qn8JBN94EkuGDKF1aaR5ek2nyf6BePUl7_8OlvuezlkdJo9CwKHmfFJRxUFVpw';
+  }
   getCurrentIP(_req: Request, _res: Response) {
     return require('dns').lookup(require('os').hostname(), function (_err: any, add: any, _fam: any) {
       _res.status(200).send({
