@@ -14,7 +14,13 @@
     "react-ui/node_modules"
   ],
   "dependencies": {
-    "express": "^4.16.4"
+    "express": "^4.16.4",
+    "@babel/core": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "@babel/preset-typescript": "^7.3.3",
+    "@babel/register": "^7.5.5",
+    "@types/express": "^4.17.0",
+    "ts-node": "^8.3.0"
   },
   "repository": {
     "type": "git",
@@ -27,12 +33,4 @@
     "react"
   ],
   "license": "MIT",
-  "devDependencies": {
-    "@babel/core": "^7.5.5",
-    "@babel/preset-env": "^7.5.5",
-    "@babel/preset-typescript": "^7.3.3",
-    "@babel/register": "^7.5.5",
-    "@types/express": "^4.17.0",
-    "ts-node": "^8.3.0"
-  }
 }
