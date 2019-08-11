@@ -22,5 +22,6 @@ router.get('/api/clash', function(req, res) {
   res.send('{"message":"You found the clash API"}');
 });
 router.get('/api/clash/currentIp', clashController.getCurrentIP);
+router.get('/api/clash/clans/search', clashController.searchClans);
 
 export default router;
