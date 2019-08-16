@@ -4,12 +4,11 @@ import clashController from '../controllers/clash';
 
 const router = express.Router();
 
-  // Answer API requests.
-router.get('/api', function (req, res) {
+// Answer API requests.
+router.get('/api', function(req, res) {
   res.set('Content-Type', 'application/json');
   res.send('{"message":"You have found the api"}');
 });
-
 
 router.get('/api/v1/todos', todoController.getAllTodos);
 router.get('/api/v1/todos/:id', todoController.getTodo);

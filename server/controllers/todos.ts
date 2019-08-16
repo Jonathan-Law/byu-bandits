@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { Request, Response } from 'express';
 
 /* eslint-disable class-methods-use-this */
 class TodosController {

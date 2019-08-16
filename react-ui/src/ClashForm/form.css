@@ -1,0 +1,11 @@
+.clash-form {
+  margin: 8px;
+}
+
+input {
+  padding: 8px 12px;
+  border-radius: 4px;
+  line-height: 32px;
+  height: 32px;
+  font-size: 14px;
+}

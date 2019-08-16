@@ -6,8 +6,10 @@
     "node": "10.x"
   },
   "scripts": {
+    "go": "npm run build --prefix react-ui && npm run start",
     "start": "node server/start.ts",
-    "build": "cd react-ui/ && npm install && npm run build"
+    "build": "cd react-ui/ && npm install && npm run build",
+    "format": "./format.sh"
   },
   "cacheDirectories": [
     "node_modules",
