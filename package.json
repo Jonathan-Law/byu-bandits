@@ -27,6 +27,7 @@
     "babel-preset-react-app": "^9.0.1",
     "express": "^4.16.4",
     "node-fetch": "^2.6.0",
+    "react-router-dom": "^4.4.0-beta.8",
     "ts-node": "^8.3.0"
   },
   "repository": {
