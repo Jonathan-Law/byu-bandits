@@ -1,9 +1,10 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { BrowserRouter as Router, Link, Route, match } from 'react-router-dom';
+import { BrowserRouter as Router, Link, Route, match, RouteComponentProps } from 'react-router-dom';
 import * as H from 'history';
 import logo from './logo.svg';
 import './App.css';
 import ClashForm from './ClashForm';
+import { StaticContext } from 'react-router';
 
 function App() {
   const [message, setMessage] = useState(null);
@@ -36,45 +37,52 @@ function App() {
   return (
     <Router>
       <div className='App flex flex-container flex-align-stretch'>
-        {/* <header className="App-header flex-auto flex-container flex-column">
-          <img src={logo} className="App-logo" alt="logo" />
-          { process.env.NODE_ENV === 'production' ?
-          <p>
-          This is a production build from create-react-app.
-          </p>
-          : <p>
-          Edit <code>src/App.js</code> and save to reload.
-          </p>
-        }
-        <p>{'« '}<strong>
-        {isFetching
-          ? 'Fetching message from API'
-          : message}
-          </strong>{' »'}</p>
-          <p><a
-          className="App-link"
-          href="https://github.com/mars/heroku-cra-node"
-          >
-          React + Node deployment on Heroku
-          </a></p>
-        </header> */}
-        <Route exact={true} path={`/`} component={Nav}></Route>
         <Route
-          path={`/clashForm`}
-          render={({match}) => (
+          exact={true}
+          path={`/`}
+          render={(props) => (
             <div className='flex flex-align-stretch flex-row flex-container'>
               <div className='flex-auto flex-align-stretch flex-column flex-container'>
-                <Nav match={match}></Nav>
+                <Nav routeProps={props}></Nav>
               </div>
-              <ClashForm className='flex flex-align-stretch flex-container flex-column'></ClashForm>
+              <header className='App-header flex flex-container flex-column padding-xxlarge'>
+                <img src={logo} className='App-logo' alt='logo' />
+                {process.env.NODE_ENV === 'production' ? (
+                  <p>This is a production build from create-react-app.</p>
+                ) : (
+                  <p>
+                    Edit <code>src/App.js</code> and save to reload.
+                  </p>
+                )}
+                <p>
+                  {'« '}
+                  <strong>{isFetching ? 'Fetching message from API' : message}</strong>
+                  {' »'}
+                </p>
+                <p>
+                  <a className='App-link' href='https://github.com/mars/heroku-cra-node'>
+                    React + Node deployment
+                  </a>
+                </p>
+              </header>
+            </div>
+          )}></Route>
+        <Route
+          path={`/clashForm`}
+          render={(props) => (
+            <div className='flex flex-align-stretch flex-row flex-container'>
+              <div className='flex-auto flex-align-stretch flex-column flex-container'>
+                <Nav routeProps={props}></Nav>
+              </div>
+              <ClashForm className='flex flex-align-stretch flex-container flex-column padding-xxlarge'></ClashForm>
             </div>
           )}></Route>
         <Route
           path={`/tableTest`}
-          render={({match}) => (
+          render={(props) => (
             <div className='flex flex-align-stretch flex-row flex-container'>
               <div className='flex-auto flex-align-stretch flex-column flex-container'>
-                <Nav match={match}></Nav>
+                <Nav routeProps={props}></Nav>
               </div>
               <TableTest></TableTest>
             </div>
@@ -85,42 +93,39 @@ function App() {
 }
 
 const TableTest = () => {
-  return <div className="flex flex-align-stretch flex-column flex-container">TABLE TEST</div>;
+  return <div className='flex flex-align-stretch flex-column flex-container padding-xxlarge'>TABLE TEST</div>;
 };
 
-const Nav = (props: {
-  history?: H.History;
-  location?: H.Location<H.LocationState>;
-  match: match<any>
-  staticContext?: any
-}) => {
-  const {match} = props;
-  const links = [{
-    path: `/`,
-    current: match.path === `/`,
-    label: 'Home'
-  },
-  {
-    path: `/clashForm`,
-    current: match.path.indexOf(`/clashForm`) === 0,
-    label: 'Clash form'
-  },
-  {
-    path: `/tableTest`,
-    current: match.path.indexOf(`/tableTest`) === 0,
-    label: 'Table test'
-  }]
+const Nav = (props: {routeProps: RouteComponentProps<any, StaticContext, any>}) => {
+const { routeProps } = props;
+  const links = [
+    {
+      path: `/`,
+      current: routeProps.match.path === `/`,
+      label: 'Home',
+    },
+    {
+      path: `/clashForm`,
+      current: routeProps.match.path.indexOf(`/clashForm`) === 0,
+      label: 'Clash form',
+    },
+    {
+      path: `/tableTest`,
+      current: routeProps.match.path.indexOf(`/tableTest`) === 0,
+      label: 'Table test',
+    },
+  ];
   return (
-    <nav className="flex-auto flex-align-stretch flex-align-self-start flex-column flex-container">
-      {(() => (
+    <nav className='app-nav flex-auto flex-align-stretch flex-align-self-start flex-column flex-container'>
+      {(() =>
         links.map((link) => {
-          const classNames = `flex flex-container flex-align-stretch flex-row ${link.current? 'current' : ''}`;
+          const classNames = `flex flex-container flex-align-stretch flex-row ${link.current ? 'current' : ''}`;
           return (
-          <Link className={classNames} to={link.path}>
-            <button className="flex flex-container flex-align-center flex-row">{link.label}</button>
-          </Link>)
-        })
-      ))()}
+            <Link className={classNames} to={link.path}>
+              <button className='flex flex-container flex-align-center flex-row'>{link.label}</button>
+            </Link>
+          );
+        }))()}
     </nav>
   );
 };
