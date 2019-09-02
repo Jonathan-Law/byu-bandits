@@ -5,6 +5,7 @@ import withFixedColumns from "react-table-hoc-fixed-columns";
 // Import React Table
 import ReactTable from 'react-table';
 import "react-table/react-table.css";
+import 'react-table-hoc-fixed-columns/lib/styles.css';
 
 interface ITableTestProps{ 
   className?: string | undefined

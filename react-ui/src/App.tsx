@@ -43,7 +43,7 @@ function App() {
           render={(props) => (
             <div className='flex flex-align-stretch flex-row flex-container'>
               <div className='flex-auto flex-align-stretch flex-column flex-container'>
-                <Nav routeProps={props}/>
+                <Nav routeProps={props} />
               </div>
               <header className='App-header flex flex-container flex-column padding-xxlarge'>
                 <img src={logo} className='App-logo' alt='logo' />
@@ -66,34 +66,37 @@ function App() {
                 </p>
               </header>
             </div>
-          )} />
+          )}
+        />
         <Route
           path={`/clashForm`}
           render={(props) => (
             <div className='flex flex-align-stretch flex-row flex-container'>
               <div className='flex-auto flex-align-stretch flex-column flex-container'>
-                <Nav routeProps={props}/>
+                <Nav routeProps={props} />
               </div>
-              <ClashForm className='flex flex-align-stretch flex-container flex-column padding-xxlarge'/>
+              <ClashForm className='flex flex-align-stretch flex-container flex-column padding-xxlarge' />
             </div>
-          )} />
+          )}
+        />
         <Route
           path={`/tableTest`}
           render={(props) => (
             <div className='flex flex-align-stretch flex-row flex-container'>
               <div className='flex-auto flex-align-stretch flex-column flex-container'>
-                <Nav routeProps={props}/>
+                <Nav routeProps={props} />
               </div>
-              <TableTest className="flex flex-align-stretch flex-column flex-container"/>
+              <TableTest className='flex flex-align-stretch flex-column flex-container' />
             </div>
-          )} />
+          )}
+        />
       </div>
     </Router>
   );
 }
 
-const Nav = (props: {routeProps: RouteComponentProps<any, StaticContext, any>}) => {
-const { routeProps } = props;
+const Nav = (props: { routeProps: RouteComponentProps<any, StaticContext, any> }) => {
+  const { routeProps } = props;
   const links = [
     {
       current: routeProps.match.path === `/`,
