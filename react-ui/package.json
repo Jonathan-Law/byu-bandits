@@ -18,7 +18,8 @@
     "react-table": "^6.10.0",
     "react-table-hoc-fixed-columns": "^2.1.1",
     "tslint": "^5.19.0",
-    "typescript": "^3.5.3"
+    "typescript": "^3.5.3",
+    "uuid": "^3.3.3"
   },
   "scripts": {
     "build": "react-app-rewired build",
@@ -40,6 +41,7 @@
   ],
   "proxy": "http://localhost:5000",
   "devDependencies": {
+    "@types/uuid": "^3.4.5",
     "cssnano": "^4.1.10",
     "customize-cra": "^0.5.0",
     "eslint-config-prettier": "^6.1.0",

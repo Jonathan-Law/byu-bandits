@@ -25,21 +25,21 @@ export default class TableTest extends React.Component<ITableTestProps, ITableTe
     this.state = { selected: {}, selectAll: 0, data: makeData() };
   }
 
-	private toggleRow(firstName: string) {
+	private toggleRow = (id: string) => {
 		const newSelected = Object.assign({}, this.state.selected);
-		newSelected[firstName] = !this.state.selected[firstName];
+		newSelected[id] = !this.state.selected[id];
 		this.setState({
 			selected: newSelected,
 			selectAll: 2
 		});
 	}
 
-	private toggleSelectAll() {
+	private toggleSelectAll = () => {
 		const newSelected: {[key: string]: any} = {};
 
 		if (this.state.selectAll === 0) {
-			this.state.data.forEach((x: {firstName: string}) => {
-				newSelected[x.firstName] = true;
+			this.state.data.forEach((x: {id: string}) => {
+				newSelected[x.id] = true;
 			});
 		}
 
@@ -55,7 +55,13 @@ export default class TableTest extends React.Component<ITableTestProps, ITableTe
     return (
       <div className={className}>
         <ReactTableFixedColumns
+          showPagination={false}
           data={data}
+          style={{
+            // Setting this will force the table body to overflow and scroll (which triggers sticky headers/footers)
+            height: '400px',
+            width: '90%',
+          }}
           columns={[
             {
               Header: "Name",
@@ -69,7 +75,8 @@ export default class TableTest extends React.Component<ITableTestProps, ITableTe
                       <input
                         type="checkbox"
                         className="checkbox"
-                        onChange={() => this.toggleRow(original.firstName)}
+                        checked={this.state.selected[original.id] === true}
+                        onChange={() => this.toggleRow(original.id)}
                       />
                     );
                   },
@@ -156,7 +163,6 @@ export default class TableTest extends React.Component<ITableTestProps, ITableTe
             }
           ]}
           defaultPageSize={50}
-          style={{ height: 500 }}
           className="-striped"
         />
         <br />

@@ -1,5 +1,6 @@
 import React from "react";
 import namor from 'namor';
+import {v4} from 'uuid';
 import "./index.css";
 
 const range = (len: any) => {
@@ -31,6 +32,7 @@ export function makeData(len = 5553) {
   return range(len).map(d => {
     return {
       ...newPerson(),
+      id: v4(),
       children: range(10).map(newPerson)
     };
   });
