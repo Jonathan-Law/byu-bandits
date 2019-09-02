@@ -11,11 +11,11 @@ export default class SearchClans extends React.Component<{ className: string }, 
     };
   }
 
-  updateQuery = (e: React.ChangeEvent<HTMLInputElement>) => {
+  public updateQuery = (e: React.ChangeEvent<HTMLInputElement>) => {
     this.setState({ query: e.target.value });
   };
 
-  callQuery = (e: any) => {
+  public callQuery = (e: any) => {
     e.preventDefault();
     ClashService.searchClans(this.state.query).then((resp: any) => {
       this.setState({
@@ -26,7 +26,7 @@ export default class SearchClans extends React.Component<{ className: string }, 
     return false;
   };
 
-  render() {
+  public render() {
     const { className } = this.props;
     const _className = `${className} search-clans-form`;
     return (
@@ -35,8 +35,8 @@ export default class SearchClans extends React.Component<{ className: string }, 
         <form onSubmit={this.callQuery}>
           <input type='text' placeholder='search' name='query' value={this.state.query} onChange={this.updateQuery} />
         </form>
-        <pre>{this.state.resp.items ? this.state.resp.items.map((i) => {
-          return (<div>
+        <pre>{this.state.resp.items ? this.state.resp.items.map((i, index) => {
+          return (<div key={index}>
               <img width="70" height="auto" src={i.badgeUrls.small} alt="badge"/>
               <span>{i.name}</span>
             </div>);

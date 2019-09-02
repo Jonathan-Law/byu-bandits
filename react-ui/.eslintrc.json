@@ -1,0 +1,41 @@
+{
+  "extends": "react-app",
+  "env": {
+    "browser": true,
+    "commonjs": true,
+    "jest": true,
+    "node": false,
+    "es6": true
+  },
+
+  "globals": {
+    "__filename": true,
+    "angular": false,
+    "d3": false,
+    "Domo": false,
+    "sinon": false,
+    "process": true
+  },
+
+  "rules": {
+    "no-restricted-syntax": [
+      "error",
+      {
+        "selector": ":matches(FunctionDeclaration[generator=true], FunctionExpression[generator=true])",
+        "message": "Generator functions not allowed for performance reasons"
+      },
+      {
+        "selector": ":matches(FunctionDeclaration[async=true], FunctionExpression[async=true], ArrowFunctionExpression[async=true])",
+        "message": "Async functions not allowed for performance reasons"
+      }
+    ]
+  },
+  "overrides": [
+    {
+      "files": "*.test.js",
+      "rules": {
+        "no-restricted-syntax": 0
+      }
+    }
+  ]
+}

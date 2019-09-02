@@ -1,15 +1,15 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { BrowserRouter as Router, Link, Route, match, RouteComponentProps } from 'react-router-dom';
-import * as H from 'history';
+import { BrowserRouter as Router, Link, Route, RouteComponentProps } from 'react-router-dom';
 import logo from './logo.svg';
 import './App.css';
 import ClashForm from './ClashForm';
 import { StaticContext } from 'react-router';
+import TableTest from './TableTest';
 
 function App() {
   const [message, setMessage] = useState(null);
   const [isFetching, setIsFetching] = useState(false);
-  const [url, setUrl] = useState('/api');
+  const [url] = useState('/api');
 
   const fetchData = useCallback(() => {
     fetch(url)
@@ -43,7 +43,7 @@ function App() {
           render={(props) => (
             <div className='flex flex-align-stretch flex-row flex-container'>
               <div className='flex-auto flex-align-stretch flex-column flex-container'>
-                <Nav routeProps={props}></Nav>
+                <Nav routeProps={props}/>
               </div>
               <header className='App-header flex flex-container flex-column padding-xxlarge'>
                 <img src={logo} className='App-logo' alt='logo' />
@@ -66,62 +66,58 @@ function App() {
                 </p>
               </header>
             </div>
-          )}></Route>
+          )} />
         <Route
           path={`/clashForm`}
           render={(props) => (
             <div className='flex flex-align-stretch flex-row flex-container'>
               <div className='flex-auto flex-align-stretch flex-column flex-container'>
-                <Nav routeProps={props}></Nav>
+                <Nav routeProps={props}/>
               </div>
-              <ClashForm className='flex flex-align-stretch flex-container flex-column padding-xxlarge'></ClashForm>
+              <ClashForm className='flex flex-align-stretch flex-container flex-column padding-xxlarge'/>
             </div>
-          )}></Route>
+          )} />
         <Route
           path={`/tableTest`}
           render={(props) => (
             <div className='flex flex-align-stretch flex-row flex-container'>
               <div className='flex-auto flex-align-stretch flex-column flex-container'>
-                <Nav routeProps={props}></Nav>
+                <Nav routeProps={props}/>
               </div>
-              <TableTest></TableTest>
+              <TableTest className="flex flex-align-stretch flex-column flex-container"/>
             </div>
-          )}></Route>
+          )} />
       </div>
     </Router>
   );
 }
 
-const TableTest = () => {
-  return <div className='flex flex-align-stretch flex-column flex-container padding-xxlarge'>TABLE TEST</div>;
-};
-
 const Nav = (props: {routeProps: RouteComponentProps<any, StaticContext, any>}) => {
 const { routeProps } = props;
   const links = [
     {
-      path: `/`,
       current: routeProps.match.path === `/`,
       label: 'Home',
+      path: `/`,
     },
     {
-      path: `/clashForm`,
       current: routeProps.match.path.indexOf(`/clashForm`) === 0,
       label: 'Clash form',
+      path: `/clashForm`,
     },
     {
-      path: `/tableTest`,
       current: routeProps.match.path.indexOf(`/tableTest`) === 0,
       label: 'Table test',
+      path: `/tableTest`,
     },
   ];
   return (
     <nav className='app-nav flex-auto flex-align-stretch flex-align-self-start flex-column flex-container'>
       {(() =>
-        links.map((link) => {
+        links.map((link, i) => {
           const classNames = `flex flex-container flex-align-stretch flex-row ${link.current ? 'current' : ''}`;
           return (
-            <Link className={classNames} to={link.path}>
+            <Link key={i} className={classNames} to={link.path}>
               <button className='flex flex-container flex-align-center flex-row'>{link.label}</button>
             </Link>
           );
